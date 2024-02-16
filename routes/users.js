@@ -18,7 +18,31 @@ router.get('/user-detail/:userId', (req,res,next => {
     })
 }))
 
-router.post("/user-update/:userId", isAuthenticated, )
+router.post("/user-update/:userId", isAuthenticated,isProfileOwner, (req,res,next) => {
+
+  const { userId } = req.params
+
+  const { fullName, email, password } = req.body
+
+  User.findByIdAndUpdate(
+  userId,
+  {
+    fullName,
+      email,
+      password
+    },
+    {
+      new: true
+    }
+  )
+  .then((updatedUser) => {
+    res.json(updatedUser)
+  })
+  .catch((err) => {
+    console.log(err)
+    next(err)
+  })
+})
 
 
 router.get('/', function(req, res, next) {

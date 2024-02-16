@@ -6,3 +6,5 @@ const isProfileOwner = (req,res,next)  =>{
         res.status(401).json({message: "This is not your profile"})
     }
 }
+
+module.export = isProfileOwner
