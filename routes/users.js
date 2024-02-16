@@ -25,6 +25,7 @@ router.post("/user-update/:userId", isAuthenticated,isProfileOwner, (req,res,nex
   const { fullName, email, password } = req.body
 
   User.findByIdAndUpdate(
+
   userId,
   {
     fullName,
@@ -35,6 +36,7 @@ router.post("/user-update/:userId", isAuthenticated,isProfileOwner, (req,res,nex
       new: true
     }
   )
+  
   .then((updatedUser) => {
     res.json(updatedUser)
   })
