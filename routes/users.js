@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const User = require('../models/User');
+const isAuthenticated = require('../middleware/isAuthenticated');
 
 router.get('/user-detail/:userId', (req,res,next => {
 
@@ -16,6 +17,8 @@ router.get('/user-detail/:userId', (req,res,next => {
       next(err)
     })
 }))
+
+router.post("/user-update/:userId", isAuthenticated, )
 
 
 router.get('/', function(req, res, next) {
