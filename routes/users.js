@@ -36,7 +36,7 @@ router.post("/user-update/:userId", isAuthenticated,isProfileOwner, (req,res,nex
       new: true
     }
   )
-  
+
   .then((updatedUser) => {
     res.json(updatedUser)
   })
@@ -45,6 +45,8 @@ router.post("/user-update/:userId", isAuthenticated,isProfileOwner, (req,res,nex
     next(err)
   })
 })
+
+
 
 
 router.get('/', function(req, res, next) {
