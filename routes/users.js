@@ -46,6 +46,33 @@ router.post("/user-update/:userId", isAuthenticated,isProfileOwner, (req,res,nex
   })
 })
 
+router.get('/delete/:userId', isAuthenticated, isProfileOwner, (req, res, next) => {
+
+  const { userId } = req.params
+
+  User.findByIdAndDelete(userId)
+  .then((deletedUser) => {
+
+    Item.deleteMany({
+      owner: deletedUser._id
+    })
+
+    .then((deletedItems) => {
+      console.log("Deleted Items", deletedItems)
+      res.json(deletedUser)
+    })
+    .catch((err) => {
+      console.log(err)
+      next(err)
+    })
+
+  })
+
+
+})
+
+
+
 
 
 
