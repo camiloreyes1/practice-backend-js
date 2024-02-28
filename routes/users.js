@@ -3,8 +3,9 @@ const router = express.Router();
 
 const User = require('../models/User');
 const Item = require('../models/Item'); // Add this line to require the Item model
-const isAuthenticated = require('../middleware/isAuthenticated');
-const isProfileOwner = require("../middleware/isProfileOwner");
+
+const isAuthenticated = require("../middleware/isAuthenticated");
+// const isProfileOwner = require("../middleware/isProfileOwner");
 
 router.get('/user-detail/:userId', (req, res, next) => {
   const { userId } = req.params;
@@ -19,7 +20,7 @@ router.get('/user-detail/:userId', (req, res, next) => {
     });
 });
 
-router.post('/user-update/:userId', isAuthenticated, isProfileOwner, (req, res, next) => {
+router.post('/user-update/:userId', isAuthenticated,  (req, res, next) => {
   const { userId } = req.params;
   const { fullName, email, password } = req.body;
 
@@ -33,7 +34,7 @@ router.post('/user-update/:userId', isAuthenticated, isProfileOwner, (req, res, 
     });
 });
 
-router.get('/delete/:userId', isAuthenticated, isProfileOwner, (req, res, next) => {
+router.get('/delete/:userId', isAuthenticated, (req, res, next) => {
   const { userId } = req.params;
 
   User.findByIdAndDelete(userId)
