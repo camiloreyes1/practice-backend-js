@@ -7,4 +7,4 @@ const isProfileOwner = (req,res,next)  =>{
     }
 }
 
-module.export = isProfileOwner
+module.exports = isProfileOwner
